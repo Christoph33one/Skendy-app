@@ -6,11 +6,16 @@ import {
   TouchableOpacity,
   TextInput,
   Button,
+  Alert,
 } from "react-native";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-function IconPicker(props) {
+function IconPicker({ navigation }) {
+  const handlePress = () => {
+    navigation.navigate("Home");
+  };
+
   const [selectedIcon, setSelectedIcon] = useState(null);
   const [categoryName, setCategoryName] = useState("");
   const [categories, setCategories] = useState([]);
@@ -33,29 +38,33 @@ function IconPicker(props) {
   };
 
   const handleCategoryNameChange = (text) => {
-    setCategoryName;
+    setCategoryName(text);
   };
 
   const handleAddCategory = () => {
-    if (categoryName.trim() !== "" && selectedIcon) {
+    if (categoryName !== "" && selectedIcon) {
       setCategories((prevCategories) => [
         ...prevCategories,
         { name: categoryName, icon: selectedIcon },
       ]);
       setCategoryName("");
-      selectedIcon(null);
+      setSelectedIcon(null);
     }
+  };
+
+  const handleSubmit = () => {
+    handleAddCategory();
   };
 
   return (
     <View style={styles.container}>
-      <Text>Custom Category</Text>
+      <Text>CUSTOM CATEGORY</Text>
       <View style={styles.inputContainer}>
         <MaterialCommunityIcons name={selectedIcon} size={40} color="#45C786" />
         <TextInput
           style={styles.TextInput}
           placeholder="Add Category Name"
-          value={setCategoryName}
+          value={categoryName}
           onChangeText={handleCategoryNameChange}
         />
       </View>
@@ -73,11 +82,19 @@ function IconPicker(props) {
               size={50}
               padding={15}
               color="#45C786"
+              paddingTop={50}
             />
           </TouchableOpacity>
         ))}
       </View>
-      <Button title="Create Category" onPress={handleAddCategory} />
+      <Button title="Create Category" onPress={handleSubmit} />
+      <View style={styles.homeButton}>
+        <Button
+          title="Click here to return Home!"
+          onPress={handlePress}
+          color="#F55B6E"
+        />
+      </View>
     </View>
   );
 }
@@ -86,7 +103,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    paddingTop: "30%",
+    paddingTop: "20%",
     backgroundColor: "#fff",
   },
   inputContainer: {
@@ -110,6 +127,9 @@ const styles = StyleSheet.create({
   icon: {
     padding: 10,
     alignItems: "center",
+  },
+  homeButton: {
+    paddingTop: 40,
   },
 });
 

@@ -3,7 +3,9 @@ import { Button, View, Text } from "react-native";
 import { StyleSheet } from "react-native";
 
 function Home({ navigation }) {
-  const handlePress = () => {};
+  const handlePress = () => {
+    navigation.navigate("IconPicker");
+  };
 
   return (
     <View style={styles.container}>
