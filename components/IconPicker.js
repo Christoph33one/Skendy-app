@@ -1,65 +1,45 @@
-import React, { useState } from "react";
-import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
+import { useState } from "react";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 function IconPicker(props) {
   const [selectedIcon, setSelectedIcon] = useState(null);
-  const iconData = [
-    {
-      name: "Home",
-      backgroundColor: "yellow",
-      icon: "floor-lamp",
-    },
-    {
-      name: "Studies",
-      backgroundColor: "red",
-      icon: "book",
-    },
-    {
-      name: "Office",
-      backgroundColor: "blue",
-      icon: "folder",
-    },
-    {
-      name: "Music",
-      backgroundColor: "green",
-      icon: "headphones",
-    },
-    {
-      name: "Work",
-      backgroundColor: "black",
-      icon: "desk",
-    },
-    {
-      name: "taxes",
-      backgroundColor: "dodgerblue",
-      icon: "import",
-    },
+  const [catergoryName, setCategoryName] = useState("");
+  const [categories, setCategoris] = useState([]);
+
+
+  const iconList = [
+    { icon: "book", title: "Tax" },
+    { icon: "folder-home-outline", title: "Job" },
+    { icon: "hospital", title: "Healthcare" },
+    { icon: "school", title: "School" },
+    { icon: "van-utility", title: "Utilities" },
+    { icon: "home-circle", title: "Housing" },
+    { icon: "piggy-bank-outline", title: "Investments" },
+    { icon: "file", title: "Business" },
+    { icon: "file-cabinet", title: "Lawsuit" },
+    { icon: "file-download-outline", title: "Miscellaneous" },
   ];
 
-  const handleIconPress = (icon) => {
-    setSelectedIcon(icon);
-    console.log("icon pressed");
-  };
+  const handleIconSelected = (icon) => {
+    selectedIcon(icon);
+  }
+
 
   return (
     <View style={styles.container}>
-      {iconData.map((icon) => (
-        <TouchableOpacity
-          key={icon.name}
-          onPress={() => handleIconPress(icon)}
-          style={[
-            styles.icon,
-            {
-              backgroundColor: icon.backgroundColor,
-              borderColor: selectedIcon === icon ? "black" : "transparent",
-            },
-          ]}
-        >
-          <MaterialCommunityIcons name={icon.icon} size={30} color="white" />
-          <Text>{icon.name}</Text>
-        </TouchableOpacity>
+      <Text>Custom Category</Text>
+      <View 
+      {iconList.map((item, index) => (
+        <TouchableOpacity 
+        key={index}
+        title={item.title}
+        onPress={() => handleIconSelected(item.icon)}
+        />
       ))}
+      />
+      <MaterialCommunityIcons />
     </View>
   );
 }
@@ -67,13 +47,8 @@ function IconPicker(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 20,
-  },
-  icon: {
-    padding: 5,
-    borderRadius: "50%",
-    margin: 5,
-    borderWidth: 2,
+    alignItems: "center",
+    paddingTop: "30%",
   },
 });
 

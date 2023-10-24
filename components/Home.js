@@ -3,9 +3,7 @@ import { Button, View, Text } from "react-native";
 import { StyleSheet } from "react-native";
 
 function Home({ navigation }) {
-  const handlePress = () => {
-    navigation.navigate("CustomCategory");
-  };
+  const handlePress = () => {};
 
   return (
     <View style={styles.container}>
