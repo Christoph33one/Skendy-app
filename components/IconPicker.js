@@ -6,31 +6,57 @@ import {
   TouchableOpacity,
   TextInput,
   Button,
-  Alert,
+  ScrollView,
 } from "react-native";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-function IconPicker({ navigation }) {
-  const handlePress = () => {
-    navigation.navigate("Home");
-  };
-
+function IconPicker(props) {
   const [selectedIcon, setSelectedIcon] = useState(null);
   const [categoryName, setCategoryName] = useState("");
   const [categories, setCategories] = useState([]);
 
   const iconList = [
-    { icon: "book", title: "Tax" },
-    { icon: "folder-home-outline", title: "Job" },
-    { icon: "hospital", title: "Healthcare" },
-    { icon: "school", title: "School" },
-    { icon: "van-utility", title: "Utilities" },
-    { icon: "home-circle", title: "Housing" },
-    { icon: "piggy-bank-outline", title: "Investments" },
-    { icon: "file", title: "Business" },
-    { icon: "file-cabinet", title: "Lawsuit" },
-    { icon: "file-download-outline", title: "Miscellaneous" },
+    { icon: "book" },
+    { icon: "folder-home-outline" },
+    { icon: "hospital" },
+    { icon: "school" },
+    { icon: "van-utility" },
+    { icon: "home-circle" },
+    { icon: "piggy-bank-outline" },
+    { icon: "file" },
+    { icon: "file-cabinet" },
+    { icon: "file-download-outline" },
+    { icon: "book" },
+    { icon: "folder-home-outline" },
+    { icon: "hospital" },
+    { icon: "school" },
+    { icon: "van-utility" },
+    { icon: "home-circle" },
+    { icon: "piggy-bank-outline" },
+    { icon: "file" },
+    { icon: "file-cabinet" },
+    { icon: "file-download-outline" },
+    { icon: "book" },
+    { icon: "folder-home-outline" },
+    { icon: "hospital" },
+    { icon: "school" },
+    { icon: "van-utility" },
+    { icon: "home-circle" },
+    { icon: "piggy-bank-outline" },
+    { icon: "file" },
+    { icon: "file-cabinet" },
+    { icon: "file-download-outline" },
+    { icon: "book" },
+    { icon: "folder-home-outline" },
+    { icon: "hospital" },
+    { icon: "school" },
+    { icon: "van-utility" },
+    { icon: "home-circle" },
+    { icon: "piggy-bank-outline" },
+    { icon: "file" },
+    { icon: "file-cabinet" },
+    { icon: "file-download-outline" },
   ];
 
   const handleIconSelected = (icon) => {
@@ -57,45 +83,43 @@ function IconPicker({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      <Text>CUSTOM CATEGORY</Text>
-      <View style={styles.inputContainer}>
-        <MaterialCommunityIcons name={selectedIcon} size={40} color="#45C786" />
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Add Category Name"
-          value={categoryName}
-          onChangeText={handleCategoryNameChange}
-        />
+    <ScrollView>
+      <View style={styles.homeButton}></View>
+      <View style={styles.container}>
+        <Text>Add new category</Text>
+        <View style={styles.inputContainer}>
+          <MaterialCommunityIcons
+            name={selectedIcon}
+            size={40}
+            color="#45C786"
+          />
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Add Category Name"
+            value={categoryName}
+            onChangeText={handleCategoryNameChange}
+          />
+        </View>
+        <Button title="Create Category" onPress={handleSubmit} />
+        <View style={styles.iconContainer}>
+          {iconList.map((item, index) => (
+            <TouchableOpacity
+              key={index}
+              style={styles.icon}
+              onPress={() => handleIconSelected(item.icon)}
+            >
+              <MaterialCommunityIcons
+                name={item.icon}
+                size={50}
+                padding={15}
+                color="#45C786"
+                paddingTop={50}
+              />
+            </TouchableOpacity>
+          ))}
+        </View>
       </View>
-
-      <View style={styles.iconContainer}>
-        {iconList.map((item, index) => (
-          <TouchableOpacity
-            key={index}
-            style={styles.icon}
-            onPress={() => handleIconSelected(item.icon)}
-          >
-            <Text>{item.title}</Text>
-            <MaterialCommunityIcons
-              name={item.icon}
-              size={50}
-              padding={15}
-              color="#45C786"
-              paddingTop={50}
-            />
-          </TouchableOpacity>
-        ))}
-      </View>
-      <Button title="Create Category" onPress={handleSubmit} />
-      <View style={styles.homeButton}>
-        <Button
-          title="Click here to return Home!"
-          onPress={handlePress}
-          color="#F55B6E"
-        />
-      </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -112,7 +136,7 @@ const styles = StyleSheet.create({
   },
   TextInput: {
     height: 40,
-    width: 200,
+    width: 300,
     margin: 12,
     borderWidth: 2,
     borderRadius: 5,
@@ -125,7 +149,6 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   icon: {
-    padding: 10,
     alignItems: "center",
   },
   homeButton: {
