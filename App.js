@@ -10,7 +10,7 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator mode="modal">
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="IconPicker" component={IconPicker} />
       </Stack.Navigator>
