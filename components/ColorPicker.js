@@ -2,22 +2,34 @@ import React from "react";
 import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 
 function ColorPicker({ onColorSelected }) {
-  const commonColors = [
-    "#A569BD",
-    "#F39C12",
-    "#1ABC9C",
-    "#D35400",
-    "#C0392B",
-    "#5499C7",
-    "#E74C3C",
-    "#3498DB",
-    "#E74C3C",
+  const colors = [
+    "#000000",
+    "#808080",
+    "#FF5733",
+    "#FDFD96",
+    "#80FF72",
+    "#5DADE2",
+    "#D2B4DE",
+    "#FFC3A0",
+    "#BDC3C7",
+    "#FFD700",
+    "#77B5FE",
+    "#FF69B4",
     "#48C9B0",
-    "#E74C3C",
     "#85C1E9",
-    "#D35400",
-    "#F1948A",
-    "#16A085",
+    "#D4E157",
+    "#FF5733",
+    "#FDFD96",
+    "#80FF72",
+    "#5DADE2",
+    "#D2B4DE",
+    "#FFC3A0",
+    "#BDC3C7",
+    "#FFD700",
+    "#77B5FE",
+    "#FF69B4",
+    "#48C9B0",
+    "#85C1E9",
     "#D4E157",
     "#FF5733",
     "#FDFD96",
@@ -31,7 +43,7 @@ function ColorPicker({ onColorSelected }) {
 
   return (
     <ScrollView horizontal style={styles.container}>
-      {commonColors.map((color, index) => (
+      {colors.map((color, index) => (
         <TouchableOpacity
           key={index}
           onPress={() => handleColorSelected(color)}

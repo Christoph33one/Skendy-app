@@ -12,11 +12,11 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ColorPicker from "./ColorPicker";
 
-function IconPicker() {
-  const [selectedIcon, setSelectedIcon] = useState(null);
+function IconPicker({ navigation }) {
   const [categoryName, setCategoryName] = useState("");
-  const [categories, setCategories] = useState([]);
+  const [selectedIcon, setSelectedIcon] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
+  const [categories, setCategories] = useState([]);
 
   const iconList = [
     { icon: "book" },
@@ -43,7 +43,7 @@ function IconPicker() {
     if (categoryName !== "" && selectedIcon && selectedColor) {
       setCategories((prevCategories) => [
         ...prevCategories,
-        { name: categoryName, icon: selectedIcon, color: selectedColor },
+        { name: categoryName, icon: selectedIcon, color: selectedColor }, // Add the selected color
       ]);
       setCategoryName("");
       setSelectedIcon(null);
@@ -53,6 +53,11 @@ function IconPicker() {
 
   const handleSubmit = () => {
     handleAddCategory();
+  };
+
+  // Pass new category state to ViewCategories component
+  const handleCategories = () => {
+    navigation.navigate("ViewCategories", { categories });
   };
 
   return (
@@ -94,6 +99,7 @@ function IconPicker() {
             </TouchableOpacity>
           ))}
         </View>
+        <Button title="View Categories" onPress={handleCategories} />
       </View>
     </ScrollView>
   );
