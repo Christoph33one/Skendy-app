@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
@@ -10,43 +10,15 @@ import {
 } from "react-native";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import ColorPicker from "./ColorPicker";
 
-function IconPicker(props) {
+function IconPicker() {
   const [selectedIcon, setSelectedIcon] = useState(null);
   const [categoryName, setCategoryName] = useState("");
   const [categories, setCategories] = useState([]);
+  const [selectedColor, setSelectedColor] = useState(null);
 
   const iconList = [
-    { icon: "book" },
-    { icon: "folder-home-outline" },
-    { icon: "hospital" },
-    { icon: "school" },
-    { icon: "van-utility" },
-    { icon: "home-circle" },
-    { icon: "piggy-bank-outline" },
-    { icon: "file" },
-    { icon: "file-cabinet" },
-    { icon: "file-download-outline" },
-    { icon: "book" },
-    { icon: "folder-home-outline" },
-    { icon: "hospital" },
-    { icon: "school" },
-    { icon: "van-utility" },
-    { icon: "home-circle" },
-    { icon: "piggy-bank-outline" },
-    { icon: "file" },
-    { icon: "file-cabinet" },
-    { icon: "file-download-outline" },
-    { icon: "book" },
-    { icon: "folder-home-outline" },
-    { icon: "hospital" },
-    { icon: "school" },
-    { icon: "van-utility" },
-    { icon: "home-circle" },
-    { icon: "piggy-bank-outline" },
-    { icon: "file" },
-    { icon: "file-cabinet" },
-    { icon: "file-download-outline" },
     { icon: "book" },
     { icon: "folder-home-outline" },
     { icon: "hospital" },
@@ -68,13 +40,14 @@ function IconPicker(props) {
   };
 
   const handleAddCategory = () => {
-    if (categoryName !== "" && selectedIcon) {
+    if (categoryName !== "" && selectedIcon && selectedColor) {
       setCategories((prevCategories) => [
         ...prevCategories,
-        { name: categoryName, icon: selectedIcon },
+        { name: categoryName, icon: selectedIcon, color: selectedColor },
       ]);
       setCategoryName("");
       setSelectedIcon(null);
+      setSelectedColor(null);
     }
   };
 
@@ -91,7 +64,7 @@ function IconPicker(props) {
           <MaterialCommunityIcons
             name={selectedIcon}
             size={40}
-            color="#45C786"
+            color={selectedColor || "#45c786"}
           />
           <TextInput
             style={styles.TextInput}
@@ -101,6 +74,9 @@ function IconPicker(props) {
           />
         </View>
         <Button title="Create Category" onPress={handleSubmit} />
+
+        <ColorPicker onColorSelected={(color) => setSelectedColor(color)} />
+
         <View style={styles.iconContainer}>
           {iconList.map((item, index) => (
             <TouchableOpacity
@@ -151,8 +127,12 @@ const styles = StyleSheet.create({
   icon: {
     alignItems: "center",
   },
-  homeButton: {
-    paddingTop: 40,
+
+  colorPreview: {
+    width: 50,
+    height: 50,
+    marginTop: 5,
+    borderRadius: 50,
   },
 });
 
